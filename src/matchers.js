@@ -53,7 +53,7 @@ function generateResults(pass, actualString, expected, verb, observed) {
 
 function makeHTMLArray(obj) {
   if (isString(obj)) {
-    return window.jQuery ? jQuery(obj) : document.querySelectorAll(obj);
+    return document.querySelectorAll(obj);
   }
   if ('innerHTML' in obj) {
     return Array(obj);
@@ -160,7 +160,7 @@ module.exports = {
     const rules = Object.keys(expected);
     const observed = {};
     const pass = rules.every(function(rule) {
-      const style = window.jQuery ? jQuery(actual).css(rule) : getComputedStyle(actual)[rule];
+      const style = getComputedStyle(actual)[rule];
       observed[rule] = '' + style;
       return match(expected[rule], style);
     });
